@@ -1,7 +1,10 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://src/player/scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/characters/Emily.png" type="Texture" id=2]
+[ext_resource path="res://assets/characters/Emily/Emily.png" type="Texture" id=2]
+[ext_resource path="res://assets/lights/circle-light.png" type="Texture" id=3]
+[ext_resource path="res://assets/lights/cone-light.png" type="Texture" id=4]
+[ext_resource path="res://assets/characters/Emily/Emily-with-match-stick.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -107,7 +110,7 @@ graph_offset = Vector2( 0, 112.008 )
 resource_name = "IdleDown"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -124,7 +127,7 @@ resource_name = "IdleLeft"
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -141,7 +144,7 @@ resource_name = "IdleRight"
 length = 0.1
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -157,7 +160,7 @@ tracks/0/keys = {
 resource_name = "IdleUp"
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -174,7 +177,7 @@ resource_name = "RunDown"
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -191,7 +194,7 @@ resource_name = "RunLeft"
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -208,7 +211,7 @@ resource_name = "RunRight"
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -225,7 +228,7 @@ resource_name = "RunUp"
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -242,7 +245,7 @@ resource_name = "WalkDown"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -259,7 +262,7 @@ resource_name = "WalkLeft"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -276,7 +279,7 @@ resource_name = "WalkRight"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -293,7 +296,7 @@ resource_name = "WalkUp"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("EmptyHandsSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -307,17 +310,25 @@ tracks/0/keys = {
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="EmptyHandsSprite" type="Sprite" parent="."]
 position = Vector2( 0, -9 )
 scale = Vector2( 0.704082, 0.704082 )
 texture = ExtResource( 2 )
 hframes = 3
 vframes = 4
-frame = 10
+frame = 4
+region_rect = Rect2( 5, 7, 24, 61 )
+region_filter_clip = true
+
+[node name="MatchStickSprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 0, -15.3367 )
+scale = Vector2( 0.495731, 0.495731 )
+texture = ExtResource( 5 )
+hframes = 3
+vframes = 4
+frame = 4
 region_rect = Rect2( 5, 7, 24, 61 )
 region_filter_clip = true
 
@@ -330,9 +341,9 @@ tree_root = SubResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 3 )
-parameters/Idle/blend_position = Vector2( 0.00316954, -0.303448 )
-parameters/Run/blend_position = Vector2( 0, -0.038 )
-parameters/Walk/blend_position = Vector2( 0.00950873, 0.00948286 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, 0 )
+parameters/Walk/blend_position = Vector2( 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/IdleDown = SubResource( 11 )
@@ -347,3 +358,17 @@ anims/WalkDown = SubResource( 16 )
 anims/WalkLeft = SubResource( 8 )
 anims/WalkRight = SubResource( 5 )
 anims/WalkUp = SubResource( 15 )
+
+[node name="Light2D" type="Light2D" parent="."]
+visible = false
+texture = ExtResource( 3 )
+texture_scale = 0.6
+energy = 0.8
+shadow_enabled = true
+
+[node name="FlashlightLightD2" type="Light2D" parent="."]
+position = Vector2( 81, -4 )
+texture = ExtResource( 4 )
+texture_scale = 0.2
+energy = 0.5
+shadow_enabled = true

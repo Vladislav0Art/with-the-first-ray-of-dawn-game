@@ -16,7 +16,7 @@ onready var animationState  = animationTree.get("parameters/playback")
 
 
 func _ready():
-	pass # Replace with function body.
+	animationTree.active = true
 
 
 func _process(delta):

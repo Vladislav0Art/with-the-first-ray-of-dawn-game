@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Emily.png-8e465844dc0d7cc4929c4ef94ddfb14f.stex"
+path="res://.import/Emily-with-match-stick.png-de9c513f1a774b8aab56ebfc6465e541.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/Emily.png"
-dest_files=[ "res://.import/Emily.png-8e465844dc0d7cc4929c4ef94ddfb14f.stex" ]
+source_file="res://assets/characters/Emily/Emily-with-match-stick.png"
+dest_files=[ "res://.import/Emily-with-match-stick.png-de9c513f1a774b8aab56ebfc6465e541.stex" ]
 
 [params]
 
