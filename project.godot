@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "ErrorState",
 "language": "GDScript",
 "path": "res://src/common/enums/ErrorState.gd"
+}, {
+"base": "Node",
+"class": "MoveDirections",
+"language": "GDScript",
+"path": "res://src/common/enums/MoveDirections.gd"
 } ]
 _global_script_class_icons={
 "CharacterMovingEnv": "",
-"ErrorState": ""
+"ErrorState": "",
+"MoveDirections": ""
 }
 
 [application]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/lights/cone-light.png" type="Texture" id=1]
+[ext_resource path="res://src/light-sources/flashlight/scripts/Flashlight.gd" type="Script" id=2]
+
+[node name="Flashlight" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="FlashlightCone" type="Light2D" parent="."]
+position = Vector2( 93.5036, 0 )
+texture = ExtResource( 1 )
+texture_scale = 0.2
+energy = 0.5
+shadow_enabled = true
