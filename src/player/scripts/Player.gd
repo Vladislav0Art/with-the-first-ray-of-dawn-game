@@ -1,15 +1,18 @@
 extends KinematicBody2D
 
+
 # preloaded classes
 const CharacterMovingEnv = preload("res://src/player/scripts/class-names/CharacterMovingEnv.gd")
+const InputUtils         = preload("res://src/common/utils/InputUtils.gd")
 
 
 # members
 var velocity : Vector2 = Vector2.ZERO
 var stamina  : float   = CharacterMovingEnv.MaxStamina
 
-# child nodes
-onready var Flashlight = $Flashlight
+
+# nodes
+
 
 # animation
 onready var animationPlayer = $AnimationPlayer
@@ -17,23 +20,14 @@ onready var animationTree   = $AnimationTree
 onready var animationState  = animationTree.get("parameters/playback")
 
 
+
 func _ready() -> void:
 	animationTree.active = true
 
 
-func _process(delta : float) -> void:
-	var movingDirection = getMovingDirection()
-	
+func _process(delta : float) -> void:	
+	var movingDirection = InputUtils.getMovingDirection()
 	processMoving(movingDirection, delta)
-	Flashlight.rotateLightCone(movingDirection)
-
-
-func getMovingDirection():
-	var inputVector = Vector2.ZERO
-	inputVector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	inputVector.y = Input.get_action_strength("ui_down")  - Input.get_action_strength("ui_up")
-	
-	return inputVector.normalized()
 
 
 func walk(movingDirection : Vector2, delta : float) -> void:
@@ -68,7 +62,7 @@ func processMoving(movingDirection: Vector2, delta : float) -> void:
 	if (movingDirection != Vector2.ZERO):
 		animationTree.set("parameters/Idle/blend_position", movingDirection)
 
-		isRunningActionActive = Input.is_action_pressed("ui_run")
+		isRunningActionActive = InputUtils.isRunningActionActive()#Input.is_action_pressed("ui_run")
 		var isAbleToRun = true
 
 		if (isRunningActionActive):
@@ -85,5 +79,4 @@ func processMoving(movingDirection: Vector2, delta : float) -> void:
 	if (!isRunningActionActive):
 		recoverStamina(delta)
 
-	#print(stamina)
 	velocity = move_and_slide(velocity)

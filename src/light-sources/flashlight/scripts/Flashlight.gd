@@ -3,17 +3,39 @@ extends Node2D
 
 # preloaded classes
 const MoveDirections = preload("res://src/common/enums/MoveDirections.gd")
+const InputUtils     = preload("res://src/common/utils/InputUtils.gd")
 
 
 # consts
+const DefaultFlashlightAngle = deg2rad(90)
 
 
 # members
-var previousDirection : int = MoveDirections.__None__
+var previousDirection : int  = MoveDirections.__None__
+var isTurnedOn        : bool = false
 
 
-# child nodes
-#onready var FlashlightCone = $FlashlightCone
+# nodes
+onready var FlashlightCone = $FlashlightCone
+
+
+
+func _ready() -> void:
+	set_rotation(DefaultFlashlightAngle)
+	FlashlightCone.visible = isTurnedOn
+
+
+func _process(_delta : float) -> void:
+	var movingDirection = InputUtils.getMovingDirection()
+	rotateLightCone(movingDirection)
+	
+	if (InputUtils.isLightingActionRequested()):
+		toggleFlashlight()
+	
+
+func toggleFlashlight() -> void:
+	isTurnedOn = !isTurnedOn
+	FlashlightCone.visible = isTurnedOn
 
 
 func createDirectionMask(direction : Vector2):
@@ -46,4 +68,3 @@ func rotateLightCone(direction : Vector2) -> void:
 		
 		# setting direction of Flashlight node point
 		set_rotation(flashlightAngle)
-		#print(flashlightAngle)
