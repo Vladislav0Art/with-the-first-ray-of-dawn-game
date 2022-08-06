@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/arts/spring-forest.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/tinypixel.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://src/ui/screens/game-over/scripts/GameOverScreen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 1, 1, 1, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="GameOverScreen" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="Sprite" parent="PanelContainer"]
+position = Vector2( 248, 119 )
+scale = Vector2( 0.646169, 0.649718 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Dimmer" type="ColorRect" parent="PanelContainer/Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -436.5
+margin_top = -354.0
+margin_right = -436.5
+margin_bottom = -354.0
+color = Color( 0, 0, 0.0392157, 0.85098 )
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 473.0
+margin_bottom = 263.0
+custom_constants/margin_right = 40
+custom_constants/margin_top = 40
+custom_constants/margin_left = 40
+custom_constants/margin_bottom = 40
+
+[node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 426.0
+margin_bottom = 216.0
+custom_constants/separation = 55
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/Rows"]
+margin_right = 386.0
+margin_bottom = 19.0
+custom_fonts/font = SubResource( 1 )
+text = "The Darkness Has Swallowed Emily"
+align = 1
+autowrap = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/Rows"]
+margin_top = 74.0
+margin_right = 386.0
+margin_bottom = 130.0
+
+[node name="Buttons" type="VBoxContainer" parent="PanelContainer/MarginContainer/Rows/CenterContainer"]
+margin_left = 126.0
+margin_right = 259.0
+margin_bottom = 56.0
+custom_constants/separation = 8
+
+[node name="RestartGameButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Buttons"]
+margin_right = 133.0
+margin_bottom = 25.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 2 )
+text = "Restart Game"
+flat = true
+
+[node name="ExitGameButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/Buttons"]
+margin_top = 33.0
+margin_right = 133.0
+margin_bottom = 56.0
+mouse_default_cursor_shape = 2
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 4 )
+text = "Exit Game"
+flat = true
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Buttons/RestartGameButton" to="." method="_on_RestartGameButton_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/Buttons/ExitGameButton" to="." method="_on_ExitGameButton_pressed"]

@@ -62,7 +62,7 @@ func processMoving(movingDirection: Vector2, delta : float) -> void:
 	if (movingDirection != Vector2.ZERO):
 		animationTree.set("parameters/Idle/blend_position", movingDirection)
 
-		isRunningActionActive = InputUtils.isRunningActionActive()#Input.is_action_pressed("ui_run")
+		isRunningActionActive = InputUtils.isRunningActionActive()
 		var isAbleToRun = true
 
 		if (isRunningActionActive):
