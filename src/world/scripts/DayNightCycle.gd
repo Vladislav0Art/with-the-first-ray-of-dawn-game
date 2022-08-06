@@ -7,7 +7,7 @@ extends CanvasModulate
 # consts
 const NightColor        : Color = Color("#3e3e3e")
 const DayColor          : Color = Color("#ffffff")
-const GameSessionTime_s : int   = 20
+const GameSessionTime_s : int   = 3 * 60
 
 
 # members

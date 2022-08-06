@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://src/player/scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/Emily/Emily.png" type="Texture" id=2]
 [ext_resource path="res://assets/lights/circle-light.png" type="Texture" id=3]
+[ext_resource path="res://src/light-sources/vignette-shader/VignetteShader.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/characters/Emily/Emily-with-match-stick.png" type="Texture" id=5]
 [ext_resource path="res://src/light-sources/flashlight/Flashlight.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/characters/Emily/Emily-with-flashlight.png" type="Texture" id=7]
@@ -382,3 +383,5 @@ wait_time = 2.0
 one_shot = true
 autostart = true
 script = ExtResource( 8 )
+
+[node name="VignetteShader" parent="NyctophobiaAttackStartTimer" instance=ExtResource( 4 )]
