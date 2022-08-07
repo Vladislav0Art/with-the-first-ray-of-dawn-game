@@ -6,14 +6,16 @@ extends Timer
 
 
 # consts
-const NyctophobiaAttackStartDelay_s      : int   = 10
-const InvisibleVignetteMultiplier        : float = 1.0
-const VisibleVignetteMultiplier          : float = -0.6
+const NyctophobiaAttackStartDelay_s    : int   = 10
+const InvisibleVignetteMultiplier      : float = 1.0
+const VisibleVignetteMultiplier        : float = -0.6
+const NyctophobiaEffectReductionTime_s : int   = 3
 
 
 # members
 var timeRanOut  : bool  = false
-var elapsedTime : float = 0.0
+var vignetteElapsedTime_s : float = 0.0
+var nyctophobiaReductionElapsedTime_s : float = 0.0
 
 
 # nodes
@@ -34,8 +36,10 @@ func _process(delta : float) -> void:
 		return
 	
 	#print("left time ", get_time_left())
-	setUpNyctophobiaAttackTimer()
+	setUpNyctophobiaAttackTimer(delta)
 	setUpVignetteVisibility(delta)
+	
+	print(nyctophobiaReductionElapsedTime_s, " ", getVignetteVisibilityMultiplier())
 	
 	if (is_stopped()):
 		timeRanOut = true
@@ -43,26 +47,27 @@ func _process(delta : float) -> void:
 		get_tree().change_scene("res://src/ui/screens/game-over/GameOverScreen.tscn")
 
 
-	
-	
 
 
-func setUpNyctophobiaAttackTimer() -> void:
+func setUpNyctophobiaAttackTimer(delta : float) -> void:
 	if (Flashlight.isTurnedOn):
+		nyctophobiaReductionElapsedTime_s += delta
 		set_paused(true)
 	elif (is_paused()):
 		set_paused(false)
 		start(NyctophobiaAttackStartDelay_s)
+	
+	if (not Flashlight.isTurnedOn):
+		nyctophobiaReductionElapsedTime_s = 0.0
 
 
 func setUpVignetteVisibility(delta : float) -> void:
-	if (Flashlight.isTurnedOn):
-		elapsedTime = 0.0
+	if (Flashlight.isTurnedOn and nyctophobiaReductionElapsedTime_s >= NyctophobiaEffectReductionTime_s):
+		vignetteElapsedTime_s = 0.0
 		setVignetteVisibilityMultiplier(InvisibleVignetteMultiplier)
-	else:
-		#print(getVignetteVisibilityMultiplier())
-		var newMultiplier = lerp(InvisibleVignetteMultiplier, VisibleVignetteMultiplier, min(1, elapsedTime / NyctophobiaAttackStartDelay_s))
-		elapsedTime += delta
+	elif (not Flashlight.isTurnedOn):
+		var newMultiplier = lerp(InvisibleVignetteMultiplier, VisibleVignetteMultiplier, min(1, vignetteElapsedTime_s / NyctophobiaAttackStartDelay_s))
+		vignetteElapsedTime_s += delta
 		setVignetteVisibilityMultiplier(newMultiplier)
 
 
