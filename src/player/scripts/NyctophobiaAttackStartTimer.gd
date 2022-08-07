@@ -39,7 +39,7 @@ func _process(delta : float) -> void:
 	setUpNyctophobiaAttackTimer(delta)
 	setUpVignetteVisibility(delta)
 	
-	print(nyctophobiaReductionElapsedTime_s, " ", getVignetteVisibilityMultiplier())
+	#print(nyctophobiaReductionElapsedTime_s, " ", getVignetteVisibilityMultiplier())
 	
 	if (is_stopped()):
 		timeRanOut = true
